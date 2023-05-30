@@ -14,7 +14,7 @@ class Vector {
             create();
         }
         ~Vector(){
-            //free(data);
+            free(data);
         }
 
         void init(){

@@ -49,19 +49,19 @@ void read_input(string filename, Mesh* M){
     dat_file.close();
 }
 
-void write_output(string filename, Vector T){
+void write_output(string filename, Vector* T){
     ofstream res_file(filename+".post.res");
     
     res_file << "GiD Post Results File 1.0\n";
 
-    int n = T.get_size();
+    int n = T->get_size();
 
     res_file << "Result \"Temperature\" \"Load Case 1\" " << 1 << " Scalar OnNodes\n";
     res_file << "ComponentNames \"T\"\n";
     res_file << "Values\n";
 
     for(int i = 0; i < n; i++)
-        res_file << i+1 << "     " << T.get(i) << "\n";
+        res_file << i+1 << "     " << T->get(i) << "\n";
 
     res_file << "End values\n";
 

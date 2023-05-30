@@ -19,9 +19,9 @@ class Matrix {
             create();
         }
         ~Matrix(){
-            /*for(int r = 0; r < nrows; r++)
+            for(int r = 0; r < nrows; r++)
                 free(data[r]);
-            free(data);*/
+            free(data);
         }
 
         void init(){

@@ -18,10 +18,10 @@ class Mesh {
         Mesh(){}
 
         ~Mesh(){
-            /*free(nodes);
+            free(nodes);
             free(elements);
             free(dirichlet_conditions);
-            free(neumann_conditions);*/
+            free(neumann_conditions);
         }
 
         void set_problem_data(float k, float Q){

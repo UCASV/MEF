@@ -30,14 +30,14 @@ void create_local_systems(Matrix* Ks, Vector* bs, short num_elements, Mesh* M){
     }
 }
 
-void assembly_K(Matrix* K, Matrix local_K, short index1, short index2){
-    K->add(local_K.get(0,0),index1,index1);    K->add(local_K.get(0,1),index1,index2);
-    K->add(local_K.get(1,0),index2,index1);    K->add(local_K.get(1,1),index2,index2);
+void assembly_K(Matrix* K, Matrix* local_K, short index1, short index2){
+    K->add(local_K->get(0,0),index1,index1);    K->add(local_K->get(0,1),index1,index2);
+    K->add(local_K->get(1,0),index2,index1);    K->add(local_K->get(1,1),index2,index2);
 }
 
-void assembly_b(Vector* b, Vector local_b, short index1, short index2){
-    b->add(local_b.get(0),index1);
-    b->add(local_b.get(1),index2);
+void assembly_b(Vector* b, Vector* local_b, short index1, short index2){
+    b->add(local_b->get(0),index1);
+    b->add(local_b->get(1),index2);
 }
 
 void assembly(Matrix* K, Vector* b, Matrix* Ks, Vector* bs, short num_elements, Mesh* M){
@@ -50,8 +50,8 @@ void assembly(Matrix* K, Vector* b, Matrix* Ks, Vector* bs, short num_elements, 
         short index1 = M->get_element(e)->get_node1()->get_ID() - 1;
         short index2 = M->get_element(e)->get_node2()->get_ID() - 1;
 
-        assembly_K(K, Ks[e], index1, index2);
-        assembly_b(b, bs[e], index1, index2);
+        assembly_K(K, &Ks[e], index1, index2);
+        assembly_b(b, &bs[e], index1, index2);
         //cout << "\t\t"; K->show(); cout << "\t\t"; b->show(); cout << "\n";
     }
 }
@@ -97,8 +97,8 @@ void apply_dirichlet_boundary_conditions(Matrix* K, Vector* b, Mesh* M){
     }
 }
 
-void solve_system(Matrix K, Vector b, Vector* T){
-    int n = K.get_nrows();
+void solve_system(Matrix* K, Vector* b, Vector* T){
+    int n = K->get_nrows();
     
     Matrix Kinv(n,n);
 
@@ -106,10 +106,10 @@ void solve_system(Matrix K, Vector b, Vector* T){
     calculate_inverse(K, n, &Kinv);
 
     cout << "\tPerforming final calculation...\n\n";
-    product_matrix_by_vector(Kinv, b, n, T);
+    product_matrix_by_vector(&Kinv, b, n, T);
 }
 
-void merge_results_with_dirichlet(Vector T, Vector* Tf, int n, Mesh* M){
+void merge_results_with_dirichlet(Vector* T, Vector* Tf, int n, Mesh* M){
     int num_dirichlet = M->get_quantity(NUM_DIRICHLET);
 
     int cont_dirichlet = 0;
@@ -123,7 +123,7 @@ void merge_results_with_dirichlet(Vector T, Vector* Tf, int n, Mesh* M){
 
             Tf->set(cond_value,i);
         }else{
-            Tf->set(T.get(cont_T),i);
+            Tf->set(T->get(cont_T),i);
             cont_T++;
         }
     }

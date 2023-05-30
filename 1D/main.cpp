@@ -41,15 +41,15 @@ int main (int argc, char** argv) {
 
     cout << "Solving global system...\n\n";
     Vector T(b.get_size()), T_full(num_nodes);
-    solve_system(K, b, &T);
+    solve_system(&K, &b, &T);
     //T.show();
     
     cout << "Preparing results...\n\n";
-    merge_results_with_dirichlet(T, &T_full, num_nodes, &M);
+    merge_results_with_dirichlet(&T, &T_full, num_nodes, &M);
     //T_full.show();
 
     cout << "Writing output file...\n\n";
-    write_output(filename, T_full);
+    write_output(filename, &T_full);
 
     return 0;
 }
