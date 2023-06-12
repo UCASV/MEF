@@ -83,7 +83,7 @@ void apply_dirichlet_boundary_conditions(Matrix* K, Vector* b, Mesh* M){
 
     for(int c = 0; c < num_conditions; c++){
         Condition* cond = M->get_dirichlet_condition(c);    
-        short index = cond->get_node()->get_ID() - 1 - previous_removed;
+        int index = cond->get_node()->get_ID() - 1 - previous_removed;
         float cond_value = cond->get_value();
 
         //K->show();
@@ -98,6 +98,8 @@ void apply_dirichlet_boundary_conditions(Matrix* K, Vector* b, Mesh* M){
 
         K->remove_column(index);
         //K->show();
+
+        previous_removed++;
     }
 }
 

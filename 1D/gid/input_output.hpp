@@ -56,7 +56,7 @@ void write_output(string filename, Vector* T){
 
     int n = T->get_size();
 
-    res_file << "Result \"Temperature\" \"Load Case 1\" " << 1 << " Scalar OnNodes\n";
+    res_file << "Result \"Temperature\" \"Load Case 1\" 1 Scalar OnNodes\n";
     res_file << "ComponentNames \"T\"\n";
     res_file << "Values\n";
 
