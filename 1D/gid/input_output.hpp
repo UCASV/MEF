@@ -27,7 +27,7 @@ void read_input(string filename, Mesh* M){
     for(int i = 0; i < num_elements; i++){
         short id, node1_id, node2_id;
         dat_file >> id >> node1_id >> node2_id;
-        M->insert_element(new Element(id, M->get_node(node1_id-1), M->get_node(node2_id-1)), i);
+        M->insert_element( new Element(id, M->get_node(node1_id-1), M->get_node(node2_id-1)) , i);
     }
 
     dat_file >> line >> line;

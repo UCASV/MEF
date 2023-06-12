@@ -1,4 +1,6 @@
 void create_local_K(Matrix* K, short element_id, Mesh* M){
+    //(k/(x2-x1))*[1 -1; -1 1]
+
     K->set_size(2,2);
 
     float k = M->get_problem_data(THERMAL_CONDUCTIVITY);
@@ -11,6 +13,8 @@ void create_local_K(Matrix* K, short element_id, Mesh* M){
 }
 
 void create_local_b(Vector* b, short element_id, Mesh* M){
+    //(Ql/2)[1;1]
+    
     b->set_size(2);
 
     float Q = M->get_problem_data(HEAT_SOURCE);
@@ -75,11 +79,11 @@ void add_column_to_RHS(Matrix* K, Vector* b, int col, float T_bar){
 
 void apply_dirichlet_boundary_conditions(Matrix* K, Vector* b, Mesh* M){
     short num_conditions = M->get_quantity(NUM_DIRICHLET);
+    int previous_removed = 0;
 
     for(int c = 0; c < num_conditions; c++){
-        Condition* cond = M->get_dirichlet_condition(c);
-        
-        short index = cond->get_node()->get_ID() - 1;
+        Condition* cond = M->get_dirichlet_condition(c);    
+        short index = cond->get_node()->get_ID() - 1 - previous_removed;
         float cond_value = cond->get_value();
 
         //K->show();

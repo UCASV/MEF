@@ -9,6 +9,7 @@ class Mesh {
     private:
         float problem_data[2];
         short quantities[4];
+
         Node** nodes;
         Element** elements;
         Condition** dirichlet_conditions;
