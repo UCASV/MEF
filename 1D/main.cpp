@@ -42,10 +42,11 @@ int main (int argc, char** argv) {
     //K.show(); b.show();
 
     cout << "Solving global system...\n\n";
-    Vector T(b.get_size()), T_full(num_nodes);
+    Vector T(b.get_size());
     solve_system(&K, &b, &T);
     //T.show();
     
+    Vector T_full(num_nodes);
     cout << "Preparing results...\n\n";
     merge_results_with_dirichlet(&T, &T_full, num_nodes, &M);
     //T_full.show();
