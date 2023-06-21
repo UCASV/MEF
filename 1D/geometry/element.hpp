@@ -1,20 +1,20 @@
 class Element {
     private:
-        short ID;
+        int ID;
         Node* node1;
         Node* node2;
 
     public:
-        Element (short identifier, Node* first_node, Node* second_node){
+        Element (int identifier, Node* first_node, Node* second_node){
             ID = identifier;
             node1 = first_node;
             node2 = second_node;
         }
 
-        void set_ID(short identifier){
+        void set_ID(int identifier){
             ID = identifier;
         }
-        short get_ID(){
+        int get_ID(){
             return ID;
         }
 

@@ -20,14 +20,14 @@ int main (int argc, char** argv) {
     read_input(filename, &M);
     //M.report();
 
-    short num_elements = M.get_quantity(NUM_ELEMENTS);
+    int num_elements = M.get_quantity(NUM_ELEMENTS);
     Matrix local_Ks[num_elements];
     Vector local_bs[num_elements];
 
     cout << "Creating local systems...\n\n";
     create_local_systems(local_Ks, local_bs, num_elements, &M);
 
-    short num_nodes = M.get_quantity(NUM_NODES);
+    int num_nodes = M.get_quantity(NUM_NODES);
     Matrix K(num_nodes,num_nodes);
     Vector b(num_nodes);
     cout << "Performing Assembly...\n\n";

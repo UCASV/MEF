@@ -8,7 +8,7 @@ enum quantity {NUM_NODES, NUM_ELEMENTS, NUM_DIRICHLET, NUM_NEUMANN};
 class Mesh {
     private:
         float problem_data[2];
-        short quantities[4];
+        int quantities[4];
         Node** nodes;
         Element** elements;
         Condition** dirichlet_conditions;
@@ -32,13 +32,13 @@ class Mesh {
             return problem_data[position];
         }
 
-        void set_quantities(short num_nodes, short num_elements, short num_dirichlet, short num_neumann){
+        void set_quantities(int num_nodes, int num_elements, int num_dirichlet, int num_neumann){
             quantities[NUM_NODES] = num_nodes;
             quantities[NUM_ELEMENTS] = num_elements;
             quantities[NUM_DIRICHLET] = num_dirichlet;
             quantities[NUM_NEUMANN] = num_neumann;
         }
-        short get_quantity(quantity position){
+        int get_quantity(quantity position){
             return quantities[position];
         }
 
@@ -49,24 +49,24 @@ class Mesh {
             neumann_conditions = (Condition**) malloc(sizeof(Condition*) * quantities[NUM_NEUMANN]);
         }
 
-        void insert_node(Node* node, short position){
+        void insert_node(Node* node, int position){
             nodes[position] = node;
         }
-        Node* get_node(short position){
+        Node* get_node(int position){
             return nodes[position];
         }
 
-        void insert_element(Element* element, short position){
+        void insert_element(Element* element, int position){
             elements[position] = element;
         }
-        Element* get_element(short position){
+        Element* get_element(int position){
             return elements[position];
         }
 
-        void insert_dirichlet_condition(Condition* dirichlet_condition, short position){
+        void insert_dirichlet_condition(Condition* dirichlet_condition, int position){
             dirichlet_conditions[position] = dirichlet_condition;
         }
-        Condition* get_dirichlet_condition(short position){
+        Condition* get_dirichlet_condition(int position){
             return dirichlet_conditions[position];
         }
         bool does_node_have_dirichlet_condition(int id){
@@ -79,10 +79,10 @@ class Mesh {
             return ans;
         }
 
-        void insert_neumann_condition(Condition* neumann_condition, short position){
+        void insert_neumann_condition(Condition* neumann_condition, int position){
             neumann_conditions[position] = neumann_condition;
         }
-        Condition* get_neumann_condition(short position){
+        Condition* get_neumann_condition(int position){
             return neumann_conditions[position];
         }
 
