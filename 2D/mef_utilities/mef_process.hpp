@@ -1,9 +1,11 @@
 float calculate_local_area(float x1, float y1, float x2, float y2, float x3, float y3){
-    return abs((x1*y2 + x2*y3 + x3*y1) - (x1*y3 + x2*y1 + x3*y2))/2;
+    float A = abs((x1*y2 + x2*y3 + x3*y1) - (x1*y3 + x2*y1 + x3*y2))/2;
+    return (A==0)?0.000001:A;
 }
 
 float calculate_local_jacobian(float x1, float y1, float x2, float y2, float x3, float y3){
-    return (x2 - x1)*(y3 - y1) - (x3 - x1)*(y2 - y1);
+    float J = (x2 - x1)*(y3 - y1) - (x3 - x1)*(y2 - y1);
+    return (J==0)?0.000001:J;
 }
 
 void calculate_B(Matrix* B){
