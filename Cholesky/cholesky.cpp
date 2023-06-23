@@ -10,7 +10,7 @@ void calculate_inverse(Matrix* A, int n, Matrix* X){
                     acum += pow(L.get(j,k),2);
                 }
                 float rad = A->get(j,j) - acum;
-                L.set((rad<=0)?0.000001:sqrt(rad),j,j);
+                L.set( ((rad<=0)?0.000001:sqrt(rad)) ,j,j);
             }
             else{
                 if(i > j){
