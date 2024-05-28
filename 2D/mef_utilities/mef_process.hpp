@@ -144,13 +144,14 @@ void apply_dirichlet_boundary_conditions(Matrix* K, Vector* b, Mesh* M){
     }
 }
 
-void solve_system(Matrix* K, Vector* b, Vector* T){
+void solve_system(Matrix* K, Vector* b, Vector* T, int mode){
     int n = K->get_nrows();
     
     Matrix Kinv(n,n);
 
     cout << "\tCalculating inverse of global matrix K...\n\n";
-    calculate_inverse(K, n, &Kinv);
+    if(mode == 1) calculate_inverse(K, n, &Kinv); //1
+    else calculate_inverse_Cholesky(K, n, &Kinv); //2
 
     cout << "\tPerforming final calculation...\n\n";
     product_matrix_by_vector(&Kinv, b, n, n, T);

@@ -8,7 +8,7 @@ using namespace std;
 #include "gid/input_output.hpp"
 
 int main (int argc, char** argv) {
-    if(argc != 2){
+    if(argc != 3){
         cout << "Incorrect use of the program, it must be: mef filename\n";
         exit(EXIT_FAILURE);
     }
@@ -45,7 +45,7 @@ int main (int argc, char** argv) {
 
     cout << "Solving global system...\n\n";
     Vector T(b.get_size()), T_full(num_nodes);
-    solve_system(&K, &b, &T);
+    solve_system(&K, &b, &T, atoi(argv[2]));
     //T.show();
     
     cout << "Preparing results...\n\n";
